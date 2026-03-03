@@ -1,11 +1,25 @@
-<script setup></script>
-
 <template>
-  <h1>You did it!</h1>
-  <p>
-    Visit <a href="https://vuejs.org/" target="_blank" rel="noopener">vuejs.org</a> to read the
-    documentation
-  </p>
+  <div id="app">
+    <Navbar />
+    <main class="container-fluid px-0">
+      <RouterView />
+    </main>
+  </div>
 </template>
 
-<style scoped></style>
+<script setup>
+import Navbar from './components/shared/Navbar.vue'
+</script>
+
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #f8f9fa;
+  font-family: 'Segoe UI', sans-serif;
+}
+</style>
