@@ -1,7 +1,7 @@
 <template>
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark px-4 shadow">
     <RouterLink class="navbar-brand fw-bold text-primary" to="/">
-      ⚡ EventFlow
+       EventFlow
     </RouterLink>
 
     <button
@@ -36,13 +36,13 @@
             href="#"
             data-bs-toggle="dropdown"
           >
-           <a> 👤 {{ authStore.user?.name }}
+           <a>  {{ authStore.user?.name }}
             <span class="badge bg-primary ms-1">{{ authStore.user?.role }}</span>
           </a>
           <ul class="dropdown-menu dropdown-menu-end dropdown-menu-dark">
             <li>
               <button class="dropdown-item text-danger" @click="handleLogout">
-                🚪 Déconnexion
+                 Déconnexion
               </button>
             </li>
           </ul>

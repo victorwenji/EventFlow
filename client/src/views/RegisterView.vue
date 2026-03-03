@@ -134,7 +134,7 @@ async function handleRegister() {
       role: form.value.role,
       password: form.value.password
     })
-    success.value = '✅ Compte créé ! Redirection...'
+    success.value = 'Compte créé ! Redirection...'
     setTimeout(() => router.push({ name: 'Login' }), 1500)
   } catch (err) {
     error.value = err.response?.data?.message || 'Erreur lors de l\'inscription'

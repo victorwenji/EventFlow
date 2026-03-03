@@ -4,7 +4,7 @@
     <section class="hero-section text-white text-center py-5">
       <div class="container py-5">
         <h1 class="display-4 fw-bold mb-3">
-          ⚡ Bienvenue sur <span class="text-primary">EventFlow</span>
+           Bienvenue sur <span class="text-primary">EventFlow</span>
         </h1>
         <p class="lead mb-4 text-light">
           La plateforme professionnelle pour gérer vos conférences, séminaires et meetups.
@@ -41,17 +41,17 @@
 <script setup>
 const features = [
   {
-    icon: '🎯',
+    icon: '',
     title: 'Gestion simplifiée',
     description: 'Créez et gérez vos événements en quelques clics avec une interface intuitive.'
   },
   {
-    icon: '🔐',
+    icon: '',
     title: 'Sécurisé & Fiable',
     description: 'Authentification JWT, rôles et permissions pour une sécurité maximale.'
   },
   {
-    icon: '📊',
+    icon: '',
     title: 'Suivi en temps réel',
     description: 'Suivez les inscriptions et les places disponibles en temps réel.'
   }

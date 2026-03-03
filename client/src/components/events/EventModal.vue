@@ -5,7 +5,7 @@
 
         <div class="modal-header bg-dark text-white">
           <h5 class="modal-title fw-bold">
-            {{ isEditing ? '✏️ Modifier l\'événement' : '➕ Créer un événement' }}
+            {{ isEditing ? ' Modifier l\'événement' : ' Créer un événement' }}
           </h5>
           <button type="button" class="btn-close btn-close-white" @click="$emit('close')"></button>
         </div>

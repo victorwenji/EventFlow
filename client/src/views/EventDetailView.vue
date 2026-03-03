@@ -31,19 +31,19 @@
           <div class="row g-3 mb-4">
             <div class="col-md-6">
               <div class="p-3 bg-light rounded">
-                <p class="text-muted small mb-1">📅 Date</p>
+                <p class="text-muted small mb-1"> Date</p>
                 <p class="fw-semibold mb-0">{{ formatDate(event.date) }}</p>
               </div>
             </div>
             <div class="col-md-6">
               <div class="p-3 bg-light rounded">
-                <p class="text-muted small mb-1">📍 Lieu</p>
+                <p class="text-muted small mb-1"> Lieu</p>
                 <p class="fw-semibold mb-0">{{ event.location }}</p>
               </div>
             </div>
             <div class="col-md-6">
               <div class="p-3 bg-light rounded">
-                <p class="text-muted small mb-1">👥 Inscriptions</p>
+                <p class="text-muted small mb-1"> Inscriptions</p>
                 <p class="fw-semibold mb-0">
                   {{ event.registrations?.length || 0 }} / {{ event.capacity }}
                 </p>
@@ -51,7 +51,7 @@
             </div>
             <div class="col-md-6">
               <div class="p-3 bg-light rounded">
-                <p class="text-muted small mb-1">👤 Organisateur</p>
+                <p class="text-muted small mb-1"> Organisateur</p>
                 <p class="fw-semibold mb-0">{{ event.organizer?.name || 'N/A' }}</p>
               </div>
             </div>
@@ -70,7 +70,7 @@
               :disabled="placesRestantes === 0 || dejaInscrit"
               @click="handleInscrire"
             >
-              {{ dejaInscrit ? '✅ Vous êtes inscrit' : "S'inscrire à cet événement" }}
+              {{ dejaInscrit ? ' Vous êtes inscrit' : "S'inscrire à cet événement" }}
             </button>
           </div>
 

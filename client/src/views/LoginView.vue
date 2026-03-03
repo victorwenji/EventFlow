@@ -57,10 +57,12 @@
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
 import { useAuthStore } from '../stores/auth.store'
+import { useToast } from 'vue-toastification'
 import api from '../services/api'
 
 const router = useRouter()
 const authStore = useAuthStore()
+const toast = useToast()
 
 const form = ref({ email: '', password: '' })
 const errors = ref({})

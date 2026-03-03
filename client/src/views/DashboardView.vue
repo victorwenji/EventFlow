@@ -4,7 +4,7 @@
     <!-- Header -->
     <div class="d-flex justify-content-between align-items-center mb-4">
       <div>
-        <h2 class="fw-bold mb-1">🎯 Dashboard</h2>
+        <h2 class="fw-bold mb-1"> Dashboard</h2>
         <p class="text-muted mb-0">Bienvenue, <strong>{{ authStore.user?.name }}</strong>
           <span class="badge bg-primary ms-2">{{ authStore.user?.role }}</span>
         </p>
@@ -14,7 +14,7 @@
         class="btn btn-primary px-4"
         @click="openCreateModal"
       >
-        ➕ Créer un événement
+         Créer un événement
       </button>
     </div>
 
@@ -26,7 +26,7 @@
             v-model="eventsStore.searchQuery"
             type="text"
             class="form-control"
-            placeholder="🔍 Rechercher un événement..."
+            placeholder=" Rechercher un événement..."
           />
         </div>
         <div class="col-md-4">
@@ -38,7 +38,7 @@
         </div>
         <div class="col-md-2">
           <button class="btn btn-outline-secondary w-100" @click="resetFilters">
-            🔄 Reset
+             Reset
           </button>
         </div>
       </div>

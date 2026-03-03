@@ -20,9 +20,9 @@
 
       <!-- Infos -->
       <ul class="list-unstyled small text-muted mt-2">
-        <li>📅 {{ formatDate(event.date) }}</li>
-        <li>📍 {{ event.location }}</li>
-        <li>👥 {{ event.registrations?.length || 0 }} / {{ event.capacity }} inscrits</li>
+        <li> {{ formatDate(event.date) }}</li>
+        <li> {{ event.location }}</li>
+        <li> {{ event.registrations?.length || 0 }} / {{ event.capacity }} inscrits</li>
       </ul>
 
       <!-- Actions -->
@@ -41,7 +41,7 @@
           :disabled="placesRestantes === 0 || dejaInscrit"
           @click="$emit('inscrire', event._id)"
         >
-          {{ dejaInscrit ? '✅ Inscrit' : "S'inscrire" }}
+          {{ dejaInscrit ? ' Inscrit' : "S'inscrire" }}
         </button>
 
         <!-- Actions organisateur/admin -->
