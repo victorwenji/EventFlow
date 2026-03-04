@@ -8,7 +8,14 @@ dotenv.config()
 const app = express()
 
 // Middlewares
-app.use(cors({ origin: process.env.CLIENT_URL, credentials: true }))
+app.use(cors({
+  origin: [
+    'http://localhost:5173',
+    'https://gentle-peace-production.up.railway.app',
+    process.env.CLIENT_URL
+  ],
+  credentials: true
+}))
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 
