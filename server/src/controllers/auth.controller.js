@@ -31,6 +31,7 @@ if (existingUser) {
     //   role
     // })
 
+  //v1
   const token = generateToken(user._id)
 
   res.status(201).json({
