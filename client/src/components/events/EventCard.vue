@@ -25,6 +25,14 @@
         <li> {{ event.registrations?.length || 0 }} / {{ event.capacity }} inscrits</li>
       </ul>
 
+      <!-- Compte à rebours -->
+      <div class="mt-2 p-2 rounded text-center"
+        :class="countdownClass"
+      >
+        <small class="fw-semibold">{{ countdownText }}</small>
+      </div>
+
+
       <!-- Actions -->
       <div class="d-flex gap-2 mt-3">
         <RouterLink
@@ -49,11 +57,11 @@
           <button
             class="btn btn-outline-warning btn-sm"
             @click="$emit('modifier', event)"
-          >✏️</button>
+          >Edit</button>
           <button
             class="btn btn-outline-danger btn-sm"
             @click="$emit('supprimer', event._id)"
-          >🗑️</button>
+          >Delet</button>
         </template>
       </div>
 
@@ -62,7 +70,7 @@
 </template>
 
 <script setup>
-import { computed } from 'vue'
+import { ref, computed, onMounted, onUnmounted } from 'vue'
 import { useAuthStore } from '../../stores/auth.store'
 
 const props = defineProps({
@@ -72,6 +80,19 @@ const props = defineProps({
 defineEmits(['inscrire', 'modifier', 'supprimer'])
 
 const authStore = useAuthStore()
+
+const now = ref(Date.now())
+let timer = null
+
+onMounted(() => {
+  timer = setInterval(() => {
+    now.value = Date.now()
+  }, 1000)
+})
+
+onUnmounted(() => {
+  clearInterval(timer)
+})
 
 const placesRestantes = computed(() =>
   props.event.capacity - (props.event.registrations?.length || 0)
@@ -84,6 +105,34 @@ const dejaInscrit = computed(() =>
 const isOwner = computed(() =>
   props.event.organizer === authStore.user?._id
 )
+
+const countdown = computed(() => {
+  const diff = new Date(props.event.date) - now.value
+  if (diff <= 0) return null
+
+  const days = Math.floor(diff / (1000 * 60 * 60 * 24))
+  const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))
+  const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60))
+  const seconds = Math.floor((diff % (1000 * 60)) / 1000)
+
+  return { days, hours, minutes, seconds }
+})
+
+const countdownText = computed(() => {
+  if (!countdown.value) return ' Événement terminé'
+  const { days, hours, minutes, seconds } = countdown.value
+  if (days > 0) return ` Dans ${days}j ${hours}h ${minutes}m`
+  if (hours > 0) return ` Dans ${hours}h ${minutes}m ${seconds}s`
+  return ` Dans ${minutes}m ${seconds}s`
+})
+
+const countdownClass = computed(() => {
+  if (!countdown.value) return 'bg-secondary bg-opacity-10 text-secondary'
+  const { days, hours } = countdown.value
+  if (days >= 1) return 'bg-success bg-opacity-10 text-success'
+  if (hours >= 1) return 'bg-warning bg-opacity-10 text-warning'
+  return 'bg-danger bg-opacity-10 text-danger'
+})
 
 function formatDate(date) {
   return new Date(date).toLocaleDateString('fr-FR', {

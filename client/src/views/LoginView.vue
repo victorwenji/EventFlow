@@ -84,6 +84,7 @@ async function handleLogin() {
   try {
     const res = await api.post('/auth/login', form.value)
     authStore.setAuth(res.data.user, res.data.token)
+    toast.success('Connexion réussie !')
     router.push({ name: 'Dashboard' })
   } catch (err) {
     error.value = err.response?.data?.message || 'Erreur de connexion'

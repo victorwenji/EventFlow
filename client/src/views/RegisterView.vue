@@ -3,12 +3,12 @@
     <div class="card border-0 shadow-lg p-4" style="width: 100%; max-width: 480px;">
 
       <div class="text-center mb-4">
-        <h2 class="fw-bold">⚡ EventFlow</h2>
+        <h2 class="fw-bold"> EventFlow</h2>
         <p class="text-muted">Créez votre compte</p>
       </div>
 
-      <div class="alert alert-danger" v-if="error">{{ error }}</div>
-      <div class="alert alert-success" v-if="success">{{ success }}</div>
+      <!-- <div class="alert alert-danger" v-if="error">{{ error }}</div>
+      <div class="alert alert-success" v-if="success">{{ success }}</div> -->
 
       <!-- Nom -->
       <div class="mb-3">
@@ -100,14 +100,14 @@
 <script setup>
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
+import { useToast } from 'vue-toastification'
 import api from '../services/api'
 
 const router = useRouter()
+const toast = useToast()
 
 const form = ref({ name: '', email: '', role: '', password: '', confirmPassword: '' })
 const errors = ref({})
-const error = ref('')
-const success = ref('')
 const loading = ref(false)
 
 function validate() {
@@ -126,7 +126,6 @@ function validate() {
 async function handleRegister() {
   if (!validate()) return
   loading.value = true
-  error.value = ''
   try {
     await api.post('/auth/register', {
       name: form.value.name,
@@ -134,10 +133,10 @@ async function handleRegister() {
       role: form.value.role,
       password: form.value.password
     })
-    success.value = 'Compte créé ! Redirection...'
+    toast.success('Compte créé ! Redirection...')
     setTimeout(() => router.push({ name: 'Login' }), 1500)
   } catch (err) {
-    error.value = err.response?.data?.message || 'Erreur lors de l\'inscription'
+    toast.error(err?.response?.data?.message || 'Erreur lors de l\'inscription')
   } finally {
     loading.value = false
   }

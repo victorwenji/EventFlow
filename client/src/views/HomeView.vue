@@ -9,7 +9,9 @@
         <p class="lead mb-4 text-light">
           La plateforme professionnelle pour gérer vos conférences, séminaires et meetups.
         </p>
-        <div class="d-flex justify-content-center gap-3">
+
+        <!-- Non connecté -->
+        <div class="d-flex justify-content-center gap-3" v-if="!authStore.isAuthenticated">
           <RouterLink to="/register" class="btn btn-primary btn-lg px-5">
             Commencer gratuitement
           </RouterLink>
@@ -17,6 +19,14 @@
             Se connecter
           </RouterLink>
         </div>
+
+        <!-- Connecté -->
+        <div v-else>
+          <RouterLink to="/dashboard" class="btn btn-primary btn-lg px-5">
+            Continuer
+          </RouterLink>
+        </div>
+
       </div>
     </section>
 
@@ -39,6 +49,10 @@
 </template>
 
 <script setup>
+import { useAuthStore } from '../stores/auth.store'
+
+const authStore = useAuthStore()
+
 const features = [
   {
     icon: '',

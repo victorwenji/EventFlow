@@ -4,7 +4,7 @@
     <!-- Header -->
     <div class="d-flex justify-content-between align-items-center mb-4">
       <div>
-        <h2 class="fw-bold mb-1"> Dashboard</h2>
+        <h2 class="fw-bold mb-1">Dashboard</h2>
         <p class="text-muted mb-0">Bienvenue, <strong>{{ authStore.user?.name }}</strong>
           <span class="badge bg-primary ms-2">{{ authStore.user?.role }}</span>
         </p>
@@ -87,12 +87,14 @@
 import { ref, onMounted } from 'vue'
 import { useAuthStore } from '../stores/auth.store'
 import { useEventsStore } from '../stores/events.store'
+import { useToast } from 'vue-toastification'
 import EventCard from '../components/events/EventCard.vue'
 import EventModal from '../components/events/EventModal.vue'
 import api from '../services/api'
 
 const authStore = useAuthStore()
 const eventsStore = useEventsStore()
+const toast = useToast()
 
 const showModal = ref(false)
 const selectedEvent = ref(null)
@@ -138,13 +140,15 @@ async function handleSubmitEvent(formData) {
     if (selectedEvent.value) {
       const res = await api.put(`/events/${selectedEvent.value._id}`, formData)
       eventsStore.updateEvent(res.data)
+      toast.success('Événement mis à jour !')
     } else {
       const res = await api.post('/events', formData)
       eventsStore.addEvent(res.data)
+      toast.success('Événement créé !')
     }
     closeModal()
   } catch (err) {
-    console.error('Erreur sauvegarde événement', err)
+    toast.error(err.response?.data?.message || 'Erreur sauvegarde')
   }
 }
 
@@ -153,8 +157,9 @@ async function handleSupprimer(id) {
   try {
     await api.delete(`/events/${id}`)
     eventsStore.removeEvent(id)
+    toast.success('Événement supprimé !')
   } catch (err) {
-    console.error('Erreur suppression', err)
+    toast.error('Erreur lors de la suppression')
   }
 }
 
@@ -162,8 +167,9 @@ async function handleInscrire(id) {
   try {
     const res = await api.post(`/events/${id}/register`)
     eventsStore.updateEvent(res.data)
+    toast.success('Inscription confirmée !')
   } catch (err) {
-    console.error('Erreur inscription', err)
+    toast.error(err.response?.data?.message || 'Erreur inscription')
   }
 }
 </script>

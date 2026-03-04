@@ -78,6 +78,49 @@
       </div>
     </div>
 
+    <!-- Liste des inscrits (admin + organisateur uniquement) -->
+    <div
+      v-if="event && (authStore.isAdmin || authStore.isOrganisateur)"
+      class="mt-4"
+    >
+      <h5 class="fw-bold mb-3">
+       Participants inscrits
+        <span class="badge bg-primary ms-2">{{ event.registrations?.length || 0 }}</span>
+      </h5>
+
+      <!-- Aucun inscrit -->
+      <div
+        v-if="!event.registrations || event.registrations.length === 0"
+        class="text-center py-3 bg-light rounded"
+      >
+        <p class="text-muted mb-0">Aucun participant inscrit pour le moment</p>
+      </div>
+
+      <!-- Table inscrits -->
+      <div class="table-responsive" v-else>
+        <table class="table table-hover align-middle">
+          <thead class="table-dark">
+            <tr>
+              <th>#</th>
+              <th>Nom</th>
+              <th>Email</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr
+              v-for="(participant, index) in event.registrations"
+              :key="participant._id"
+            >
+              <td class="text-muted">{{ index + 1 }}</td>
+              <td>
+                <span class="fw-semibold">{{ participant.name }}</span>
+              </td>
+              <td class="text-muted">{{ participant.email }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
     <!-- Erreur -->
     <div class="text-center py-5" v-else>
       <p class="text-muted">Événement introuvable.</p>
