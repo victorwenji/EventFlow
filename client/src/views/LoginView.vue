@@ -3,7 +3,7 @@
     <div class="card border-0 shadow-lg p-4" style="width: 100%; max-width: 420px;">
 
       <div class="text-center mb-4">
-        <h2 class="fw-bold">⚡ EventFlow</h2>
+        <h2 class="fw-bold"> EventFlow</h2>
         <p class="text-muted">Connectez-vous à votre compte</p>
       </div>
 
