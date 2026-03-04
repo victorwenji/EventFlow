@@ -4,7 +4,7 @@ const authMiddleware = require('../middlewares/auth.middleware')
 const roleMiddleware = require('../middlewares/role.middleware')
 
 // Debug temporaire
-console.log('eventController:', eventController)
+
 
 router.get('/', authMiddleware, eventController.getEvents)
 router.get('/:id', authMiddleware, eventController.getEvent)
